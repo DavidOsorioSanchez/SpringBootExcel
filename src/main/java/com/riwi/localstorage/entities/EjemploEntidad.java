@@ -1,5 +1,8 @@
 package com.riwi.localstorage.entities;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,14 +14,13 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@Entity
+@Entity(name = "ejemplo")
 @NoArgsConstructor
 @AllArgsConstructor
 public class EjemploEntidad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String lastname;
-    private Double price;
+    private Date firstDate;
+    private Date secondDate;
 }

@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,6 +24,7 @@ public class ReportService {
     private final EjemploRepository ejemploRepository;
 
     public void generateExcel(HttpServletResponse response) throws IOException {
+
         List<EjemploEntidad> ejemploEntidads = ejemploRepository.findAll();
 
         HSSFWorkbook workbook = new HSSFWorkbook();
@@ -29,18 +32,13 @@ public class ReportService {
         HSSFRow row = sheets.createRow(0);
 
         row.createCell(0).setCellValue("id");
-        row.createCell(1).setCellValue("name");
-        row.createCell(2).setCellValue("lastname");
-        row.createCell(3).setCellValue("price");
-
+        row.createCell(1).setCellValue("Best celler");
         int dataRowIndex = 1;
 
         for (EjemploEntidad ejemploEntidad : ejemploEntidads){
             HSSFRow datarow = sheets.createRow(dataRowIndex);
             datarow.createCell(0).setCellValue(ejemploEntidad.getId());
-            datarow.createCell(1).setCellValue(ejemploEntidad.getName());
-            datarow.createCell(2).setCellValue(ejemploEntidad.getLastname());
-            datarow.createCell(3).setCellValue(ejemploEntidad.getPrice());
+            datarow.createCell(1).setCellValue(getMaxAmountBetweenDates(ejemploEntidad.getFirstDate(), ejemploEntidad.getSecondDate()));
             dataRowIndex ++;
         }
 
@@ -50,4 +48,7 @@ public class ReportService {
         ops.close();
     }
 
+    public Long getMaxAmountBetweenDates(Date startDate, Date endDate) {
+        return ejemploRepository.findProductSale(startDate, endDate);
+    }
 }
