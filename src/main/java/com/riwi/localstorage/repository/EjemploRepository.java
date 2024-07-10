@@ -12,11 +12,11 @@ import java.util.List;
 
 @Repository
 public interface EjemploRepository extends JpaRepository<EjemploEntidad, Serializable> {
-  
-//  @Query("SELECT u FROM ejemplo u ORDER BY u.sales DESC BETWEEN ?1 AND ?2")
-//  List<EjemploEntidad> findTopNByAge( Date startDate, Date endDate);
 
-  @Query("SELECT MAX(o.product.sales) FROM Order o BETWEEN ?1 AND ?2")
+  // @Query("SELECT u FROM ejemplo u ORDER BY u.sales DESC BETWEEN ?1 AND ?2")
+  // List<EjemploEntidad> findTopNByAge( Date startDate, Date endDate);
+
+  @Query(value = "SELECT MAX(o.product.sales) FROM Order o BETWEEN ?1 AND ?2", nativeQuery = true)
   Long findProductSale(Date startDate, Date endDate);
 
 }
