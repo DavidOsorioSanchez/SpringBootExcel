@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +18,6 @@ public interface EjemploRepository extends JpaRepository<EjemploEntidad, Seriali
   // List<EjemploEntidad> findTopNByAge( Date startDate, Date endDate);
 
   @Query(value = "SELECT MAX(o.product.sales) FROM Order o BETWEEN ?1 AND ?2", nativeQuery = true)
-  Long findProductSale(Date startDate, Date endDate);
+  Long findProductSale(LocalDate startDate, LocalDate endDate);
 
 }

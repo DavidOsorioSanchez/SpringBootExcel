@@ -27,6 +27,11 @@ public class ReportService {
 
         List<EjemploEntidad> ejemploEntidads = ejemploRepository.findAll();
 
+        LocalDate today = LocalDate.now();
+
+
+
+
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheets = workbook.createSheet("courses info");
         HSSFRow row = sheets.createRow(0);
@@ -48,7 +53,7 @@ public class ReportService {
         ops.close();
     }
 
-    public Long getMaxAmountBetweenDates(Date startDate, Date endDate) {
+    public Long getMaxAmountBetweenDates(LocalDate startDate, LocalDate endDate) {
         return ejemploRepository.findProductSale(startDate, endDate);
     }
 }

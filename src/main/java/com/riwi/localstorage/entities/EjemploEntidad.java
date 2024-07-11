@@ -21,6 +21,6 @@ public class EjemploEntidad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date firstDate;
-    private Date secondDate;
+    private LocalDate firstDate;
+    private LocalDate secondDate;
 }
