@@ -43,7 +43,7 @@ public class ReportService {
         for (EjemploEntidad ejemploEntidad : ejemploEntidads){
             HSSFRow datarow = sheets.createRow(dataRowIndex);
             datarow.createCell(0).setCellValue(ejemploEntidad.getId());
-            datarow.createCell(1).setCellValue(getMaxAmountBetweenDates(ejemploEntidad.getFirstDate(), ejemploEntidad.getSecondDate()));
+            datarow.createCell(1).setCellValue(getMaxValuesOneDay(ejemploEntidad.getFirstDate()));
             dataRowIndex ++;
         }
 
@@ -53,7 +53,7 @@ public class ReportService {
         ops.close();
     }
 
-    public Long getMaxAmountBetweenDates(LocalDate startDate, LocalDate endDate) {
-        return ejemploRepository.findProductSale(startDate, endDate);
+    public Long getMaxValuesOneDay(LocalDate startDate) {
+        return ejemploRepository.findProductMostSellDay(startDate);
     }
 }
